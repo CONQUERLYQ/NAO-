@@ -1,0 +1,136 @@
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+	char s1[100],s2[100],s[101];
+	int i,j,m,n,k,d,e,flag=0;
+	scanf("%s%s%s",s1,s2,s);
+	for(i=0;i<=strlen(s)-strlen(s1);i++)
+	{
+		m=i;
+		for(j=0;j<strlen(s1);j++)
+		{
+		    if(s[m]!=s1[j])
+			break;
+			if(s[m]==s1[j])
+			m++;	
+		}
+		if(j==strlen(s1))
+		{
+			d=i;
+			break;
+		}	
+	}
+	for(n=0;n<=strlen(s)-strlen(s2);n++)
+	{
+		m=n;
+		for(k=0;k<strlen(s2);k++)
+		{
+		    if(s[m]!=s2[k])
+			break;
+			if(s[m]==s2[k])
+			m++;	
+		}
+		if(j==strlen(s2))
+		{
+			e=n;
+			break;
+		}
+	}
+	char a[100];
+	if(i>strlen(s)-strlen(s1)&&j!=strlen(s1)||n>strlen(s)-strlen(s2)&&k!=strlen(s2))
+	{
+		printf("ERROR");
+		flag=1;
+	}
+  if(flag==0)
+  {
+		j=0;
+	if(d<=e)
+	{
+		if(e-d<=strlen(s1))
+		{
+			printf("NONE");
+		    flag=1;
+		}
+		else if(strlen(s1)<=strlen(s2))
+		{
+			for(i=d+strlen(s1);i<e;i++)
+			{
+				a[j]=s[i];
+				j++;
+			}
+		}
+		else
+		{
+			for(i=e-1;i>=d+strlen(s1);i--)
+			{
+				a[j]=s[i];
+				j++;
+			}
+		}
+	}
+	else
+	{
+		if(d-e<=strlen(s2))
+		{
+			printf("NONE");
+		    flag=1;
+		}
+		else if(strlen(s2)<=strlen(s1))
+		{
+			for(i=e+strlen(s2);i<d;i++)
+			{
+				a[j]=s[i];
+				j++;
+			}
+		}
+		else
+		{
+			for(i=d-1;i>=e+strlen(s2);i--)
+			{
+				a[j]=s[i];
+				j++;
+			}
+		}
+	}
+	if(flag==0)
+	{
+		j=0;
+	  int b[strlen(a)];
+	  char c[100];
+	  for(i=0;i<strlen(a);i++)
+	  {
+		if(a[i]>=65&&a[i]<=90||a[i]>=97&&a[i]<=122)
+		b[i]=1;
+		else
+		b[i]=0;
+	  }
+	  for(i=0;i<strlen(a);i++)
+	  {
+		if(b[i]==1)
+		{
+			c[j]=a[i];
+			j++;
+		}
+	  }
+	  for(i=0;i<strlen(c);i++)
+	  {
+		if(c[i]>=65&&c[i]<=90)
+		c[i]=c[i]+32;
+		if(c[i]>=97&&c[i]<=122)
+		c[i]=c[i]-32;
+	  }
+	  char f[strlen(c)];
+	  for(i=0;i<strlen(c);i++)
+	  f[i]=c[strlen(c)-i-1];
+	  for(i=0;i<strlen(c);i++)
+	  {
+		if(f[i]>=100)
+		printf("%d%d%d",f[i]%10,f[i]/10%10,f[i]/100);
+		else
+		printf("%d%d0",f[i]%10,f[i]/10);
+	  }
+	}
+  }
+}
